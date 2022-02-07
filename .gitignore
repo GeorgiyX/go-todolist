@@ -1,0 +1,8 @@
+#development
+.idea
+
+#artifacts
+*.run
+app/models/*_easyjson.go
+build
+gen
