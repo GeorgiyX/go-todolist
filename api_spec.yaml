@@ -1,0 +1,119 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/GeorgiyX/Go-ToDo-List/1.0.0
+info:
+  description: Описание API простого сервиса todo list
+  version: "1.0.0"
+  title: ToDo List API
+  contact:
+    email: dev.georgiy@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: public
+    description: Общедоступные роуты
+
+paths:
+  /task:
+    get:
+      tags:
+        - public
+      summary: Получить список всех задач
+      responses:
+        '200':
+          description: Возвращен список задач в базе
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '500':
+          description: Не удалось получить список задач
+
+    post:
+      tags:
+        - public
+      summary:  Создать задачу
+      requestBody:
+        description: Данные форума.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '201':
+          description: Создан объект задачи
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '500':
+          description: Не удалось создать задачу
+
+  /task/{id}/toggle:
+    patch:
+      tags:
+        - public
+      summary: Изменить статус задачи
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Статус переключен
+        '404':
+          description: Не удалось найти задачу
+        '500':
+          description: Не удалось изменить задачу
+
+  /task/{id}:
+    delete:
+      tags:
+        - public
+      summary: Удалить задачу
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Задача удалена
+        '404':
+          description: Не удалось найти задачу
+        '500':
+          description: Не удалось удалить задачу
+
+components:
+  schemas:
+    Task:
+      description: Информация о задаче
+      type: object
+      required:
+        - title
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          description: идентификатор задачи
+        title:
+          type: string
+          example: Сделать зарядку
+        description:
+          type: string
+          example: 150 отжиманий, 30 подтягиваний
+        status:
+          type: boolean
