@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: "database"
+    command: -p 5432
+    environment:
+      - POSTGRES_USER=${PG_TODOLIST_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DB_NAME}
+    ports:
+      - "5432:5432"
+    expose:
+      - "8080"
+    volumes:
+      - ./pg_volume:/var/lib/postgresql/data
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: "api"
+    environment:
+      - PG_DEFAULT_USER=postgres
+      - PG_FORUM_USER=todolist_user
+      - PG_PASSWORD=todolist_user_password
+      - PG_DB_NAME=todolist
+      - PG_PORT=5432
+      - API_PORT=8080
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    depends_on:
+      - db
+
+volumes:
+  pg_volume:
+    driver: local
