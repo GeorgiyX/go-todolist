@@ -2,6 +2,9 @@ openapi: 3.0.0
 servers:
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/GeorgiyX/Go-ToDo-List/1.0.0
+  - description: localhost
+    url: http://localhost:8080/api
+
 info:
   description: Описание API простого сервиса todo list
   version: "1.0.0"
@@ -10,7 +13,7 @@ info:
     email: dev.georgiy@gmail.com
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
 tags:
   - name: public
     description: Общедоступные роуты
@@ -66,8 +69,7 @@ paths:
           name: id
           required: true
           schema:
-            type: string
-            format: uuid
+            type: integer
       responses:
         '200':
           description: Статус переключен
@@ -86,8 +88,7 @@ paths:
           name: id
           required: true
           schema:
-            type: string
-            format: uuid
+            type: integer
       responses:
         '200':
           description: Задача удалена
@@ -105,8 +106,7 @@ components:
         - title
       properties:
         id:
-          type: string
-          format: uuid
+          type: integer
           example: d290f1ee-6c54-4b01-90e6-d701748f0851
           description: идентификатор задачи
         title:
