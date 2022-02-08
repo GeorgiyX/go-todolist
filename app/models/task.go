@@ -6,3 +6,6 @@ type Task struct {
 	Description string `json:"description" gorm:"not null;default:''"`
 	Checked     bool   `json:"checked" gorm:"not null;default:false"`
 }
+
+//easyjson:json
+type Tasks []*Task

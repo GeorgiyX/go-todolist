@@ -5,8 +5,8 @@ import (
 )
 
 type ITaskUseCase interface {
-	All() (err error)
-	Create(task *models.Task) (createdTask *models.Task, err error)
-	Toggle(id uint) (err error)
-	Delete(id uint) (err error)
+	All(offset int, limit int) (tasks []*models.Task, code int)
+	Create(task *models.Task) (createdTask *models.Task, code int)
+	Toggle(id int) (code int)
+	Delete(id int) (code int)
 }

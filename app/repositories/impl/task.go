@@ -15,7 +15,7 @@ func CreateTaskRepository(db *gorm.DB) repositories.ITaskRepository {
 	return &TaskRepository{db: db}
 }
 
-func (repo *TaskRepository) GetById(id uint) (task *models.Task, err error) {
+func (repo *TaskRepository) GetById(id int) (task *models.Task, err error) {
 	task = &models.Task{}
 	err = repo.db.First(task, id).Error
 	return
@@ -44,7 +44,7 @@ func (repo *TaskRepository) Update(task *models.Task) (updatedTask *models.Task,
 	return
 }
 
-func (repo *TaskRepository) Delete(id uint) (err error) {
+func (repo *TaskRepository) Delete(id int) (err error) {
 	err = repo.db.Delete(&models.Task{}, id).Error
 	return
 }

@@ -24,6 +24,19 @@ paths:
       tags:
         - public
       summary: Получить список всех задач
+      parameters:
+        - name: offset
+          in: query
+          description: Задачи будут выводится с указанного id
+          example: 10
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Число выводимым задач
+          example: 5
+          schema:
+            type: integer
       responses:
         '200':
           description: Возвращен список задач в базе
