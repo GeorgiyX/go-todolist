@@ -34,6 +34,7 @@ func (usecase *TaskUseCase) All(offset int, limit int) (tasks []*models.Task, co
 }
 
 func (usecase *TaskUseCase) Create(task *models.Task) (createdTask *models.Task, code int) {
+	task.Id = 0
 	createdTask, err := usecase.TaskRepository.Create(task)
 	if err != nil {
 		return nil, http.StatusInternalServerError
@@ -51,7 +52,7 @@ func (usecase *TaskUseCase) Toggle(id int) (code int) {
 		return http.StatusInternalServerError
 	}
 
-	task.Checked = !task.Checked
+	*task.Checked = !*task.Checked
 	task, err = usecase.TaskRepository.Update(task)
 	if err != nil {
 		return http.StatusInternalServerError

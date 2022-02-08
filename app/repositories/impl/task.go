@@ -23,7 +23,7 @@ func (repo *TaskRepository) GetById(id int) (task *models.Task, err error) {
 
 func (repo *TaskRepository) All(offset int, limit int) (tasks []*models.Task, err error) {
 	tasks = make([]*models.Task, 0)
-	err = repo.db.Limit(limit).Offset(offset).Find(&tasks).Error
+	err = repo.db.Order("id asc").Limit(limit).Offset(offset).Find(&tasks).Error
 	return
 }
 
@@ -40,7 +40,7 @@ func (repo *TaskRepository) Create(task *models.Task) (createdTask *models.Task,
 
 func (repo *TaskRepository) Update(task *models.Task) (updatedTask *models.Task, err error) {
 	updatedTask = &models.Task{}
-	err = repo.db.Model(updatedTask).Clauses(clause.Returning{}).Save(task).Error
+	err = repo.db.Model(updatedTask).Clauses(clause.Returning{}).Where("id = ?", task.Id).Updates(task).Error
 	return
 }
 
