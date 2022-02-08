@@ -107,8 +107,8 @@ components:
       properties:
         id:
           type: integer
-          example: d290f1ee-6c54-4b01-90e6-d701748f0851
-          description: идентификатор задачи
+          example: 123
+          description: Идентификатор задачи
         title:
           type: string
           example: Сделать зарядку

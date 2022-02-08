@@ -1,5 +1,6 @@
 #development
 .idea
+.env
 
 #artifacts
 *.run

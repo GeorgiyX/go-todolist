@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"go-todolist/app/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
@@ -51,6 +52,10 @@ func (server *Server) Run() {
 		fmt.Printf("Can't create DB connection: %v", err)
 		return
 	}
+
+	err = db.AutoMigrate(
+		&models.Task{},
+	)
 
 	/* Repositories & UseCases*/
 	server.Repositories.Task = repoImpl.CreateTaskRepository(db)
