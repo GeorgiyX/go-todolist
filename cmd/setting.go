@@ -10,9 +10,9 @@ type Settings struct {
 	APIPort    uint   `env:"API_PORT" envDefault:"8080"`
 	DBHost     string `env:"PG_HOST" envDefault:"localhost"`
 	DBPort     uint   `env:"PG_PORT" envDefault:"5432"`
-	DBName     string `env:"PG_DB_NAME" envDefault:"forum"`
-	DBUser     string `env:"PG_FORUM_USER" envDefault:"forum_user"`
-	DBPassword string `env:"PG_PASSWORD" envDefault:"forum_user_password"`
+	DBName     string `env:"PG_DB_NAME" envDefault:"todolist"`
+	DBUser     string `env:"PG_TODOLIST_USER" envDefault:"todolist_user"`
+	DBPassword string `env:"PG_PASSWORD" envDefault:"todolist_user_password"`
 	DSN        string
 	APIAddr    string
 	APIPrefix  string
